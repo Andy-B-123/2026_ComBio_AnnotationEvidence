@@ -1,0 +1,18 @@
+##gff-version 3
+# A competing gene model for the synthetic example: geneA and geneB merged into one gene (the hypothesis the evidence hints at).
+# Not part of the bundle; score it against the bundle's evidence with:
+#   python scripts/summarise_gene.py examples/minimal/bundle geneAB --annotation examples/minimal/competing_model_AB.gff3
+scaffold_1	curator	gene	1001	5200	.	+	.	ID=geneAB;Name=geneAB
+scaffold_1	curator	mRNA	1001	5200	.	+	.	ID=geneAB.t1;Parent=geneAB
+scaffold_1	curator	exon	1001	1300	.	+	.	Parent=geneAB.t1
+scaffold_1	curator	exon	1701	1900	.	+	.	Parent=geneAB.t1
+scaffold_1	curator	exon	2501	2700	.	+	.	Parent=geneAB.t1
+scaffold_1	curator	exon	3401	3600	.	+	.	Parent=geneAB.t1
+scaffold_1	curator	exon	4001	4300	.	+	.	Parent=geneAB.t1
+scaffold_1	curator	exon	4801	5200	.	+	.	Parent=geneAB.t1
+scaffold_1	curator	CDS	1101	1300	.	+	0	Parent=geneAB.t1
+scaffold_1	curator	CDS	1701	1900	.	+	1	Parent=geneAB.t1
+scaffold_1	curator	CDS	2501	2700	.	+	2	Parent=geneAB.t1
+scaffold_1	curator	CDS	3401	3600	.	+	0	Parent=geneAB.t1
+scaffold_1	curator	CDS	4001	4300	.	+	1	Parent=geneAB.t1
+scaffold_1	curator	CDS	4801	5101	.	+	1	Parent=geneAB.t1

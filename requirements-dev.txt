@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest>=7
+jsonschema>=4
+# optional: pyBigWig (read/write bigWig without UCSC tools)

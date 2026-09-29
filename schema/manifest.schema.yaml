@@ -1,0 +1,150 @@
+# JSON Schema (draft 2020-12), written in YAML, for manifest.yaml of an annotation-evidence bundle.
+# Validate with:  scripts/validate_bundle.py BUNDLE_DIR   (needs `pip install jsonschema`)
+# A commented skeleton to copy is in schema/manifest.template.yaml.
+$schema: https://json-schema.org/draft/2020-12/schema
+title: annotation-evidence manifest (spec 0.1, draft)
+type: object
+required: [spec_version, bundle, assembly, annotation, evidence]
+properties:
+  spec_version:
+    type: string
+    pattern: '^[0-9]+\.[0-9]+$'
+    description: Version of the annotation-evidence specification this bundle follows.
+  bundle:
+    type: object
+    required: [id, created]
+    properties:
+      id: {type: string, minLength: 1}
+      title: {type: string}
+      description: {type: string}
+      created: {type: string, pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'}
+      created_by:
+        type: object
+        properties: {name: {type: string}, contact: {type: string}, orcid: {type: string}}
+      license: {type: string, description: SPDX identifier of the licence of the bundle data, e.g. CC0-1.0 or CC-BY-4.0}
+      generator: {type: string}
+      notes: {type: string}
+  assembly:
+    type: object
+    required: [accession, filename, checksum]
+    description: The assembly all coordinates refer to. The FASTA itself is NOT part of the bundle.
+    properties:
+      accession: {type: string, description: "INSDC/RefSeq assembly accession, or 'none' for an unsubmitted assembly"}
+      name: {type: string}
+      filename: {type: string}
+      checksum: {$ref: '#/$defs/checksum'}
+      sequences_file: {type: string, description: "Table of sequence names and lengths, normally assembly_sequences.tsv"}
+      n_sequences: {type: integer, minimum: 1}
+      total_length: {type: integer, minimum: 1}
+      taxon:
+        type: object
+        properties: {name: {type: string}, taxid: {type: [integer, 'null']}}
+      notes: {type: string}
+  annotation:
+    type: object
+    required: [filename, pipeline, version, date]
+    properties:
+      filename: {type: string}
+      checksum: {$ref: '#/$defs/checksum'}
+      pipeline: {type: string, description: "Program or workflow that produced the annotation, e.g. EGAPx, BRAKER3, MAKER"}
+      version: {type: string}
+      date: {type: string, pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2}$'}
+      source: {type: string, description: URL, DOI or path of the released annotation}
+      bytes: {type: integer}
+      records: {type: integer}
+      coordinates: {type: string}
+      index: {type: string}
+      notes: {type: string}
+  evidence:
+    type: object
+    required: [rna_short, rna_long, proteins, predictions]
+    properties:
+      rna_short: {$ref: '#/$defs/evidence_class'}
+      rna_long: {$ref: '#/$defs/evidence_class'}
+      proteins:
+        allOf:
+          - $ref: '#/$defs/evidence_class'
+          - if: {properties: {present: {const: true}}}
+            then: {required: [databases]}
+      predictions: {$ref: '#/$defs/evidence_class'}
+      coverage: {$ref: '#/$defs/evidence_class'}
+      repeats: {$ref: '#/$defs/evidence_class'}
+    additionalProperties: {$ref: '#/$defs/evidence_class'}
+
+$defs:
+  checksum:
+    type: object
+    required: [algorithm, value]
+    properties:
+      algorithm: {enum: [sha256, md5, sha512]}
+      value: {type: string, minLength: 8}
+  evidence_class:
+    type: object
+    required: [present]
+    properties:
+      present: {type: boolean, description: Whether this class of evidence exists in the bundle.}
+      reason: {type: string, description: "Why the class is absent (required when present is false)."}
+      description: {type: string}
+      data_source:
+        type: object
+        required: [kind]
+        properties:
+          kind: {enum: [SRA, ENA, GenBank, RefSeq, UniProt, local, synthetic, other]}
+          accessions: {type: array, items: {type: string}, description: "Run/BioProject/database accessions; long lists belong in samples.tsv"}
+          url: {type: string}
+          description: {type: string}
+      n_datasets: {type: integer, minimum: 0, description: "Number of libraries/samples/protein sets/predictor runs behind this class"}
+      programs:
+        type: array
+        description: Ordered pipeline steps that produced the evidence, primary program first.
+        items:
+          type: object
+          required: [name, version]
+          properties:
+            name: {type: string}
+            version: {type: string}
+            role: {type: string, description: "e.g. alignment, prediction, summarisation, conversion"}
+            parameters: {type: string, description: Command line or settings that matter for interpretation.}
+            url: {type: string}
+            source_tag: {type: string, description: "For predictions: the GFF3 column-2 value used by this program."}
+            model: {type: string, description: "For predictions: species model / training set."}
+      databases:
+        type: array
+        description: Reference databases (proteins, repeat libraries).
+        items:
+          type: object
+          required: [name, version]
+          properties:
+            name: {type: string}
+            version: {type: string}
+            taxon: {type: string}
+            url: {type: string}
+      guided_by_annotation:
+        type: boolean
+        description: True if mapping used a splice-junction database or GTF derived from the annotation being explained, or two-pass mode. Junction support can then be circular.
+      summarisation: {type: string, description: How raw alignments/predictions were reduced to the retained records.}
+      filters:
+        type: object
+        description: Every threshold that removed records. Free-form keys; use the names in docs/SPECIFICATION.md where they exist.
+      stats:
+        type: object
+        description: Counts reported by the producer script (records in and out, records dropped by each filter).
+      outputs:
+        type: array
+        minItems: 1
+        items:
+          type: object
+          required: [file, format]
+          properties:
+            file: {type: string}
+            format: {enum: [rna_junctions, long_read_models, protein_alignments, predictions, coverage_bigwig, coverage_bedgraph, repeats_bed6, other]}
+            coordinates: {enum: [1-based-closed, 0-based-half-open, not-applicable]}
+            records: {type: integer, minimum: 0}
+            bytes: {type: integer, minimum: 0}
+            sha256: {type: string, pattern: '^[0-9a-f]{64}$'}
+            index: {type: string}
+    allOf:
+      - if: {properties: {present: {const: true}}}
+        then: {required: [description, data_source, n_datasets, programs, summarisation, outputs], properties: {programs: {minItems: 1}}}
+      - if: {properties: {present: {const: false}}}
+        then: {required: [reason]}

@@ -1,0 +1,20 @@
+table longReadModels
+"Long-read transcript models collapsed by intron chain (annotation-evidence spec 0.1). BED12 + 4."
+    (
+    string chrom;        "Sequence name (as in assembly_sequences.tsv)"
+    uint   chromStart;   "Start of the model, 0-based (median observed read start)"
+    uint   chromEnd;     "End of the model, exclusive (median observed read end)"
+    string name;         "Unique model id"
+    uint   score;        "min(read_count, 1000); for browser shading only"
+    char[1] strand;      "+ or - or ."
+    uint   thickStart;   "Equal to chromStart (no CDS claim)"
+    uint   thickEnd;     "Equal to chromEnd"
+    uint   reserved;     "itemRgb"
+    int    blockCount;   "Number of exon blocks"
+    int[blockCount] blockSizes;  "Exon sizes"
+    int[blockCount] chromStarts; "Exon starts relative to chromStart"
+    uint   read_count;   "Reads collapsed into this model"
+    uint   sample_count; "Samples with at least one read"
+    string group_count;  "Distinct sample groups such as tissues or stages (a dot if unknown)"
+    string intron_chain; "Introns as 1-based closed first and last intron base, for example 1301-1700 then 1901-2500 joined by semicolons (a dot if none)"
+    )

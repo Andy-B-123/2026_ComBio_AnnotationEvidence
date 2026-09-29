@@ -1,0 +1,12 @@
+#sample_id	evidence_class	group	description	run_accession	biosample	platform	layout	strandedness	n_reads_input	n_reads_uniquely_mapped	notes
+S1	rna_short	head	synthetic short-read library 1	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+S2	rna_short	head	synthetic short-read library 2	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+S3	rna_short	head	synthetic short-read library 3	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+S4	rna_short	gut	synthetic short-read library 4	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+S5	rna_short	gut	synthetic short-read library 5	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+S6	rna_short	gonad	synthetic short-read library 6	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+S7	rna_short	gonad	synthetic short-read library 7	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+S8	rna_short	gonad	synthetic short-read library 8	.	.	ILLUMINA	paired	unstranded	.	.	synthetic
+L1	rna_long	head	synthetic long-read library 1	.	.	PACBIO	single	stranded	.	.	synthetic; Iso-Seq/Kinnex-like, refined full-length reads
+L2	rna_long	gut	synthetic long-read library 2	.	.	PACBIO	single	stranded	.	.	synthetic; Iso-Seq/Kinnex-like, refined full-length reads
+L3	rna_long	gonad	synthetic long-read library 3	.	.	PACBIO	single	stranded	.	.	synthetic; Iso-Seq/Kinnex-like, refined full-length reads

@@ -1,0 +1,5 @@
+##ae.profile=assembly_sequences
+##ae.version=0.1
+#seqid	length	sha512t24u	aliases
+scaffold_1	30000	iNm0Zt1i68z63plK2EhX5kxgc5ZMWFSn	lcl|scaffold_1
+scaffold_2	12000	tocuhfprf1xV_-jrarAPF0nEXw4BUiyw	lcl|scaffold_2

@@ -1,0 +1,37 @@
+##gff-version 3
+##sequence-region scaffold_1 1 30000
+##sequence-region scaffold_2 1 12000
+scaffold_1	synthetic	gene	1001	2700	.	+	.	ID=geneA;Name=geneA;partial=true
+scaffold_1	synthetic	mRNA	1001	2700	.	+	.	ID=geneA.t1;Parent=geneA;Name=geneA;partial=true
+scaffold_1	synthetic	exon	1001	1300	.	+	.	Parent=geneA.t1
+scaffold_1	synthetic	exon	1701	1900	.	+	.	Parent=geneA.t1
+scaffold_1	synthetic	exon	2501	2700	.	+	.	Parent=geneA.t1
+scaffold_1	synthetic	CDS	1101	1300	.	+	0	Parent=geneA.t1
+scaffold_1	synthetic	CDS	1701	1900	.	+	1	Parent=geneA.t1
+scaffold_1	synthetic	CDS	2501	2700	.	+	2	Parent=geneA.t1
+scaffold_1	synthetic	gene	3401	5200	.	+	.	ID=geneB;Name=geneB;partial=true
+scaffold_1	synthetic	mRNA	3401	5200	.	+	.	ID=geneB.t1;Parent=geneB;Name=geneB;partial=true
+scaffold_1	synthetic	exon	3401	3600	.	+	.	Parent=geneB.t1
+scaffold_1	synthetic	exon	4001	4300	.	+	.	Parent=geneB.t1
+scaffold_1	synthetic	exon	4801	5200	.	+	.	Parent=geneB.t1
+scaffold_1	synthetic	CDS	3401	3600	.	+	0	Parent=geneB.t1
+scaffold_1	synthetic	CDS	4001	4300	.	+	1	Parent=geneB.t1
+scaffold_1	synthetic	CDS	4801	5101	.	+	1	Parent=geneB.t1
+scaffold_2	synthetic	gene	1001	3500	.	-	.	ID=geneC;Name=geneC
+scaffold_2	synthetic	mRNA	1001	3500	.	-	.	ID=geneC.t1;Parent=geneC;Name=geneC
+scaffold_2	synthetic	exon	1001	1400	.	-	.	Parent=geneC.t1
+scaffold_2	synthetic	exon	2001	2300	.	-	.	Parent=geneC.t1
+scaffold_2	synthetic	exon	3201	3500	.	-	.	Parent=geneC.t1
+scaffold_2	synthetic	CDS	1041	1400	.	-	0	Parent=geneC.t1
+scaffold_2	synthetic	CDS	2001	2300	.	-	0	Parent=geneC.t1
+scaffold_2	synthetic	CDS	3201	3449	.	-	0	Parent=geneC.t1
+scaffold_2	synthetic	gene	7001	8200	.	+	.	ID=geneD;Name=geneD
+scaffold_2	synthetic	mRNA	7001	8200	.	+	.	ID=geneD.t1;Parent=geneD;Name=geneD
+scaffold_2	synthetic	exon	7001	7300	.	+	.	Parent=geneD.t1
+scaffold_2	synthetic	exon	7801	8200	.	+	.	Parent=geneD.t1
+scaffold_2	synthetic	CDS	7001	7300	.	+	0	Parent=geneD.t1
+scaffold_2	synthetic	CDS	7801	8100	.	+	0	Parent=geneD.t1
+scaffold_1	synthetic	gene	8001	8900	.	+	.	ID=geneE;Name=geneE
+scaffold_1	synthetic	mRNA	8001	8900	.	+	.	ID=geneE.t1;Parent=geneE;Name=geneE
+scaffold_1	synthetic	exon	8001	8900	.	+	.	Parent=geneE.t1
+scaffold_1	synthetic	CDS	8001	8900	.	+	0	Parent=geneE.t1

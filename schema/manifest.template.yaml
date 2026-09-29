@@ -1,0 +1,96 @@
+# Provenance template for `scripts/make_manifest.py build`.
+# Copy this file, replace every <...>, delete the classes you do not have (or set present: false and give a reason),
+# then run:  make_manifest.py build BUNDLE/ --template this.yaml --fasta genome.fa --summary rna_short=agg.json ...
+# The script adds file sizes, sha256, record counts, sample counts and the filters/statistics reported by the
+# producer scripts. Write here only what a script cannot know. Schema: schema/manifest.schema.yaml
+spec_version: "0.1"
+
+bundle:
+  id: <short-identifier, e.g. speciesname-annotation-v1-evidence>
+  title: <one line>
+  description: <what annotation this explains and why it exists>
+  license: <SPDX id of the licence for the bundle data, e.g. CC0-1.0 or CC-BY-4.0>
+  created_by:
+    name: <person or group>
+    contact: <email or ORCID>
+  notes: <anything a reader in ten years should know>
+
+assembly:
+  accession: <GCA_/GCF_ accession, or "none" for an unsubmitted assembly>
+  name: <assembly name>
+  filename: <genome.fa>                # the FASTA the coordinates refer to; it is NOT included in the bundle
+  taxon:
+    name: <scientific name>
+    taxid: <NCBI taxid or null>
+  notes: <sequence-name conventions, e.g. "names are RefSeq accessions; UCSC-style names are aliases">
+
+annotation:
+  filename: annotation.gff3.gz
+  pipeline: <EGAPx | BRAKER3 | MAKER | Liftoff | ...>
+  version: <pipeline version>
+  date: "<YYYY-MM-DD>"
+  source: <URL, DOI or accession of the released annotation>
+  notes: <parameters that matter, e.g. proteins used, whether masked, how partial models are marked>
+
+evidence:
+  rna_short:
+    present: true                      # if false: replace everything below with   reason: <why>
+    description: <e.g. Illumina RNA-seq junctions from 24 libraries, 6 tissues>
+    data_source:
+      kind: <SRA | ENA | local | other>
+      accessions: [<BioProject or run accessions; long lists belong in samples.tsv>]
+    programs:                          # ordered, primary first; version is required
+      - name: STAR
+        version: "<x.y.z>"
+        role: alignment
+        parameters: "<full command line or the settings that matter, incl. --outSJfilter* if changed, --sjdbGTFfile, --twopassMode>"
+    guided_by_annotation: <true if a GTF / junction database derived from THIS annotation, or two-pass mode, was used at mapping>
+    summarisation: <e.g. "junctions extracted from the STAR BAMs (bam_to_junctions.py) and collapsed across libraries"; the producer scripts add their own settings>
+    filters:
+      upstream_star_filters: "<the --outSJfilter* values used, or 'STAR defaults'>"
+    outputs:
+      - {file: evidence/rna_junctions.tsv.gz, format: rna_junctions}
+
+  rna_long:
+    present: true
+    description: <e.g. PacBio Iso-Seq (Kinnex) full-length reads, 12 libraries>
+    data_source: {kind: <SRA | local>, accessions: []}
+    programs:
+      - {name: minimap2, version: "<x.y>", role: alignment, parameters: "<e.g. -ax splice:hq -uf --secondary=no>"}
+      - {name: samtools, version: "<x.y>", role: filtering, parameters: "<e.g. view -F 0x900 -q 20>"}
+      - {name: bedtools, version: "<x.y>", role: bam-to-bed12, parameters: "bamtobed -bed12"}
+    summarisation: <collapsed by intron chain; single-exon reads clustered by start/end; the producer script adds min_intron_length, min_reads, ...>
+    outputs:
+      - {file: evidence/long_read_models.bed.gz, format: long_read_models}
+
+  proteins:
+    present: true
+    description: <e.g. UniRef90 Insecta proteins aligned with miniprot>
+    data_source: {kind: <UniProt | RefSeq | local>, accessions: [], url: <where the proteins came from>}
+    n_datasets: <number of proteins or protein sets>
+    programs:
+      - {name: miniprot, version: "<x.y>", role: alignment, parameters: "<e.g. miniprot -Iut16 --gff>"}
+    databases:                         # required when proteins are present
+      - {name: <e.g. UniRef90>, version: "<release>", taxon: "<e.g. Insecta (taxid 6960)>"}
+    summarisation: <miniprot GFF3 retyped; best-ranked alignment per protein kept>
+    outputs:
+      - {file: evidence/protein_alignments.gff3.gz, format: protein_alignments}
+
+  predictions:
+    present: true
+    description: <ab initio / HMM predictions that were inputs to, or are compared with, the annotation>
+    data_source: {kind: local, accessions: []}
+    n_datasets: <number of predictor runs>
+    programs:
+      - {name: AUGUSTUS, version: "<x.y.z>", role: prediction, source_tag: AUGUSTUS, model: "<species model>", parameters: "<hints? UTR?>"}
+    summarisation: <predictor output kept as GFF3>
+    outputs:
+      - {file: evidence/predictions.gff3.gz, format: predictions}
+
+  coverage:                            # optional; produced by make_coverage.py
+    present: false                     # true: description, data_source, n_datasets, programs (bedtools, bedGraphToBigWig), summarisation, outputs
+    reason: <not retained because ... | delete this class>
+
+  repeats:                             # optional
+    present: false
+    reason: <soft-masked in the assembly; not retained separately>

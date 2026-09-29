@@ -1,0 +1,27 @@
+##gff-version 3
+##PAF	PROT_AB_ortholog	466	0	466	+	scaffold_1	30000	1100	5098	1227	1398	0	AS:i:1844	ms:i:2064	np:i:414	fs:i:0	st:i:0	da:i:0	do:i:0	cg:Z:66M403V66M603U66M700N66M403V99M503V99M	cs:Z::1*gtgK:10*cccT:7*gcgP:6*gaaT:12*cccD:18*atcY*ataN:3*aaaN*tctY*tgC~gt400ag-c:15*agaM:4*gggQ:10*tcgA:3*tttW:1*tgtN:2*acaW:10*attK:3*ccaN:10*cR~gt600ag-gg:7*gttL:2*ctaC:7*gccV:2*tttC:4*gaaN:7*accW:11*atcN:1*ctcT*gttP:5*caaF:7*aaaA:2~gt700ag:3*aagP:3*ctcG:6*agtE:1*gtcL:13*ccgD:11*aacQ:2*catL:3*cccR:9*cagL:4*tatR:1*tgC~gt400ag-t:14*ctcC:24*aacY:14*tgcF:10*cctR:12*acgF:17*aagE:2*atI~gt500ag-t:8*acgN:5*gttH:15*gtgK:10*ctcA:13*attQ*tggK:5*tgtY*gagL:17*tttR*tctP:3*gtcT:3*attW:5*gagW:2
+scaffold_1	miniprot	mRNA	1101	5101	2064	+	.	ID=MP000001;Rank=1;Identity=0.8777;Positive=0.8884;Target=PROT_AB_ortholog 1 466
+scaffold_1	miniprot	CDS	1101	1300	276	+	0	Parent=MP000001;Rank=1;Identity=0.8657;Target=PROT_AB_ortholog 1 66
+scaffold_1	miniprot	CDS	1701	1900	289	+	1	Parent=MP000001;Rank=1;Identity=0.8806;Target=PROT_AB_ortholog 67 133
+scaffold_1	miniprot	CDS	2501	2700	281	+	2	Parent=MP000001;Rank=1;Identity=0.8333;Target=PROT_AB_ortholog 134 200
+scaffold_1	miniprot	CDS	3401	3600	278	+	0	Parent=MP000001;Rank=1;Identity=0.8507;Target=PROT_AB_ortholog 201 266
+scaffold_1	miniprot	CDS	4001	4300	510	+	1	Parent=MP000001;Rank=1;Identity=0.9400;Target=PROT_AB_ortholog 267 366
+scaffold_1	miniprot	CDS	4801	5101	430	+	1	Parent=MP000001;Rank=1;Identity=0.8687;Target=PROT_AB_ortholog 367 466
+scaffold_1	miniprot	stop_codon	5099	5101	0	+	0	Parent=MP000001;Rank=1
+##PAF	PROT_A_like	200	0	200	+	scaffold_1	30000	1100	2700	546	600	0	AS:i:822	ms:i:902	np:i:184	fs:i:0	st:i:0	da:i:0	do:i:24	cg:Z:66M403V66M603U66M	cs:Z::1*gtgS:25*gaaD:13*ggtQ:9*ctaA:8*ataG:4*tctW*tgC~gt400ag-c:7*gatG:4*accV:29*gcaT:3*tatW:4*attT:14*cR~gt600ag-gg:1*gtaT:1*catK*cgaT:25*aatG:4*ccgS:15*tggA:6*cacI:7
+scaffold_1	miniprot	mRNA	1101	2700	902	+	.	ID=MP000002;Rank=1;Identity=0.9100;Positive=0.9200;Target=PROT_A_like 1 200
+scaffold_1	miniprot	CDS	1101	1300	295	+	0	Parent=MP000002;Rank=1;Identity=0.9104;Target=PROT_A_like 1 66
+scaffold_1	miniprot	CDS	1701	1900	320	+	1	Parent=MP000002;Rank=1;Identity=0.9254;Target=PROT_A_like 67 133
+scaffold_1	miniprot	CDS	2501	2700	287	+	2	Parent=MP000002;Rank=1;Identity=0.8939;Target=PROT_A_like 134 200
+##PAF	PROT_B_like	266	0	266	+	scaffold_1	30000	3400	5098	723	798	0	AS:i:1176	ms:i:1271	np:i:245	fs:i:0	st:i:0	da:i:-1	do:i:0	cg:Z:66M403V99M503V99M	cs:Z::2*tcgR:15*ttgE*gctF:5*aagA:1*tcgA*agaE:19*gccT:17*tgC~gt400ag-t:6*tgtP:5*cagH:9*gccC:2*ttcT:3*ggtI:8*tggD:1*ctgC:3*ccgT:35*cctK:18*atI~gt500ag-t:9*gggW:8*cctQ:5*gctV:2*ataL:2*gtgM:4*cgtN:23*cagK:23*ttaA:10*aagF:4
+scaffold_1	miniprot	mRNA	3401	5101	1271	+	.	ID=MP000003;Rank=1;Identity=0.9060;Positive=0.9211;Target=PROT_B_like 1 266
+scaffold_1	miniprot	CDS	3401	3600	313	+	0	Parent=MP000003;Rank=1;Identity=0.8955;Target=PROT_B_like 1 66
+scaffold_1	miniprot	CDS	4001	4300	479	+	1	Parent=MP000003;Rank=1;Identity=0.9100;Target=PROT_B_like 67 166
+scaffold_1	miniprot	CDS	4801	5101	479	+	1	Parent=MP000003;Rank=1;Identity=0.9091;Target=PROT_B_like 167 266
+scaffold_1	miniprot	stop_codon	5099	5101	0	+	0	Parent=MP000003;Rank=1
+##PAF	PROT_C_homolog	302	0	302	-	scaffold_2	12000	1043	3449	831	906	0	AS:i:1342	ms:i:1416	np:i:280	fs:i:0	st:i:0	da:i:0	do:i:0	cg:Z:83M900N100M600N119M	cs:Z::5*ggaE:8*agtV:16*atgP:3*tatI:1*tgtD:1*tcgY:35*cacQ:7~gt900ag:20*ccaH:47*ccaK:13*gagD:17~gt600ag:2*ctgW:1*ggcR:4*gacI:15*cacF:28*tccT:9*ccaM:1*accE:1*caaG:1*ccaY:7*gccV:5*caaF:8*aatC:2*gatA:7*tatH:11*ggaA:2
+scaffold_2	miniprot	mRNA	1041	3449	1416	-	.	ID=MP000004;Rank=1;Identity=0.9172;Positive=0.9272;Target=PROT_C_homolog 1 302
+scaffold_2	miniprot	CDS	3201	3449	391	-	0	Parent=MP000004;Rank=1;Identity=0.9157;Target=PROT_C_homolog 1 83
+scaffold_2	miniprot	CDS	2001	2300	491	-	0	Parent=MP000004;Rank=1;Identity=0.9700;Target=PROT_C_homolog 84 183
+scaffold_2	miniprot	CDS	1041	1400	534	-	0	Parent=MP000004;Rank=1;Identity=0.8739;Target=PROT_C_homolog 184 302
+scaffold_2	miniprot	stop_codon	1041	1043	0	-	0	Parent=MP000004;Rank=1
